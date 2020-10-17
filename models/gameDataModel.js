@@ -1,4 +1,6 @@
 const allGameData = require("../data/upcomingVideoGames.json");
+const { writeDataToFIle } = require("../utils");
+const { v4: uuidv4 } = require("uuid");
 
 function findAll() {
   return new Promise((resolve, reject) => {
@@ -8,12 +10,22 @@ function findAll() {
 
 function findById(id) {
   return new Promise((resolve, reject) => {
-    const gameData = allGameData.find((game) => game.id === id );
+    const gameData = allGameData.find((game) => game.id === id);
     resolve(gameData);
+  });
+}
+
+function create(game) {
+  return new Promise((resolve, reject) => {
+    const newGame = {id: uuidv4(), ...game};
+    allGameData.push(newGame);
+    writeDataToFIle("./data/upcomingVideoGames.json", allGameData)
+    resolve(newGame);
   });
 }
 
 module.exports = {
   findAll,
-  findById
+  findById,
+  create,
 };

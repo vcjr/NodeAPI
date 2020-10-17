@@ -30,7 +30,31 @@ async function getGameData(req, res, id) {
   }
 }
 
+// @desc  Create Game Data
+// @route POST '/api/gamedata'
+async function createGameData(req, res) {
+  try {
+    const game = {
+      name: "Game Test",
+      publisher: "Rockstar Games",
+      developer: "Rockstar Games North",
+      description:
+        "This is the newest installment from Rockstar! What will they wow us with next???",
+      price: 89.99,
+    };
+
+    // Make sure to await when calling a promise
+    const newGame = await GameData.create(game);
+
+    res.writeHead(201, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify(newGame));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   getAllGameData,
   getGameData,
+  createGameData,
 };

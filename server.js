@@ -3,6 +3,7 @@ const http = require("http");
 const {
   getGameData,
   getAllGameData,
+  createGameData
 } = require("./controllers/gameDataController");
 
 const server = http.createServer((req, res) => {
@@ -14,6 +15,8 @@ const server = http.createServer((req, res) => {
   ) {
     const id = req.url.split("/")[3];
     getGameData(req, res, id);
+  } else if (req.url === "/api/gamedata" && req.method === "POST") {
+    createGameData(req, res);
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: `No Route For \{ ${req.url} \}` }));

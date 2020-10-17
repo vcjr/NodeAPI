@@ -14,7 +14,7 @@
     "developer": "Ubisoft",
     "description": "Watch Dogs: Legion is an upcoming action-adventure game, developed by Ubisoft Toronto and published by Ubisoft. It is the third instalment in the Watch Dogs series, and the sequel to Watch Dogs.",
     "price": 59.99
-  }
+  },
   {
     "id": "3",   
     "name": "The Witcher 3: Wild Hunt",
@@ -22,7 +22,7 @@
     "developer": "CD Projekt Red",
     "description": "The Witcher 3: Wild Hunt is a 2015 action role-playing game developed and published by Polish developer CD Projekt Red and is based on The Witcher series of fantasy novels written by Andrzej Sapkowski.",
     "price": 49.99
-  }
+  },
   {
     "id": "4",   
     "name": "Dirt 5",
@@ -30,7 +30,7 @@
     "developer": "Codemasters",
     "description": "Dirt 5 is an upcoming racing video game developed and published by Codemasters. It is the fourteenth game in the Colin McRae Rally series and the eighth game to carry the Dirt title.",
     "price": 59.99
-  }
+  },
   {
     "id": "5",   
     "name": "Star Citizen",

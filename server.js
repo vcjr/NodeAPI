@@ -1,21 +1,10 @@
 // Requireing the http module included with Node
 const http = require("http");
-const gameData = require("./data/upcomingVideoGames.json");
+const { getGameData } = require('./controllers/gameDataController');
 
-// Seperating out the variables
-// Creating and saving the server as a constant to be able to make this more modular
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader("Content-Type", "text/html");
-//   res.write("<h1>Hello World</h1>");
-//   res.end();
-// });
-
-// Shorter way of initializing header info
 const server = http.createServer((req, res) => {
   if (req.url === "/api/gamedata" && req.method === 'GET') {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(gameData));
+    getGameData(req, res);
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({message: `No Route For \{ ${req.url} \}`}));

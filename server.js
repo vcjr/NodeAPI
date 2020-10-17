@@ -2,7 +2,6 @@
 const http = require("http");
 const gameData = require("./data/upcomingVideoGames.json");
 
-
 // Seperating out the variables
 // Creating and saving the server as a constant to be able to make this more modular
 // const server = http.createServer((req, res) => {
@@ -14,9 +13,13 @@ const gameData = require("./data/upcomingVideoGames.json");
 
 // Shorter way of initializing header info
 const server = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type' : 'application/json'});
-  res.end(JSON.stringify(gameData));
-
+  if (req.url === "/api/gamedata" && req.method === 'GET') {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(gameData));
+  } else {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({message: `No Route For \{ ${req.url} \}`}));
+  }
 });
 
 // Setting a default port or taking in the default enviroment port

@@ -1,13 +1,22 @@
 // Requireing the http module included with Node
 const http = require("http");
-const { getGameData } = require('./controllers/gameDataController');
+const {
+  getGameData,
+  getAllGameData,
+} = require("./controllers/gameDataController");
 
 const server = http.createServer((req, res) => {
-  if (req.url === "/api/gamedata" && req.method === 'GET') {
-    getGameData(req, res);
+  if (req.url === "/api/gamedata" && req.method === "GET") {
+    getAllGameData(req, res);
+  } else if (
+    req.url.match(/\/api\/gamedata\/([0-9]+)/) &&
+    req.method === "GET"
+  ) {
+    const id = req.url.split("/")[3];
+    getGameData(req, res, id);
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({message: `No Route For \{ ${req.url} \}`}));
+    res.end(JSON.stringify({ message: `No Route For \{ ${req.url} \}` }));
   }
 });
 

@@ -39,7 +39,7 @@ async function createGameData(req, res) {
       body += chunk.toString();
     });
 
-    req.on("end", () => {
+    req.on("end", async () => {
       const { name, description, price, publisher, developer } = JSON.parse(body);
 
       const game = {

@@ -1,5 +1,5 @@
 const allGameData = require("../data/upcomingVideoGames.json");
-const { writeDataToFIle } = require("../utils");
+const { writeDataToFile } = require("../utils");
 const { v4: uuidv4 } = require("uuid");
 
 function findAll() {
@@ -19,7 +19,7 @@ function create(game) {
   return new Promise((resolve, reject) => {
     const newGame = {id: uuidv4(), ...game};
     allGameData.push(newGame);
-    writeDataToFIle("./data/upcomingVideoGames.json", allGameData)
+    writeDataToFile("./data/upcomingVideoGames.json", allGameData)
     resolve(newGame);
   });
 }

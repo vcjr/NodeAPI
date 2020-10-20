@@ -1,4 +1,4 @@
-const allGameData = require("../data/upcomingVideoGames.json");
+let allGameData = require("../data/upcomingVideoGames.json");
 const { writeDataToFile } = require("../utils");
 const { v4: uuidv4 } = require("uuid");
 
@@ -36,9 +36,18 @@ function update(id, game) {
   });
 }
 
+function remove(id) {
+  return new Promise((resolve, reject) => {
+    allGameData = allGameData.filter((game) => game.id !== id);
+    writeDataToFile("./data/upcomingVideoGames.json", allGameData);
+    resolve();
+  });
+}
+
 module.exports = {
   findAll,
   findById,
   create,
-  update
+  update,
+  remove
 };

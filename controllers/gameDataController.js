@@ -1,5 +1,6 @@
 const GameData = require("../models/gameDataModel");
 
+const { getPostData } = require("../utils");
 // @desc  Get All Game Data
 // @route GET '/api/gamedata'
 async function getAllGameData(req, res) {
@@ -34,28 +35,22 @@ async function getGameData(req, res, id) {
 // @route POST '/api/gamedata'
 async function createGameData(req, res) {
   try {
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
+    const body = await getPostData(req);
 
-    req.on("end", async () => {
-      const { name, description, price, publisher, developer } = JSON.parse(body);
+    const { name, publisher, developer, description, price } = JSON.parse(body);
 
-      const game = {
-        name,
-        publisher,
-        developer,
-        description,
-        price,
-      };
-        // Make sure to await when calling a promise
-      const newGame = await GameData.create(game);
+    const game = {
+      name,
+      publisher,
+      developer,
+      description,
+      price,
+    };
+    // Make sure to await when calling a promise
+    const newGame = await GameData.create(game);
 
-      res.writeHead(201, { "Content-Type": "application/json" });
-      return res.end(JSON.stringify(newGame));
-    });
-   
+    res.writeHead(201, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify(newGame));
   } catch (error) {
     console.log(error);
   }

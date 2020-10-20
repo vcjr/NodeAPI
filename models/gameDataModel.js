@@ -17,10 +17,22 @@ function findById(id) {
 
 function create(game) {
   return new Promise((resolve, reject) => {
-    const newGame = {id: uuidv4(), ...game};
+    const newGame = { id: uuidv4(), ...game };
     allGameData.push(newGame);
-    writeDataToFile("./data/upcomingVideoGames.json", allGameData)
+    writeDataToFile("./data/upcomingVideoGames.json", allGameData);
     resolve(newGame);
+  });
+}
+
+function update(id, game) {
+  return new Promise((resolve, reject) => {
+    const index = allGameData.findIndex((game) => {
+      return game.id === id;
+    });
+
+    allGameData[index] = { id, ...game };
+    writeDataToFile("./data/upcomingVideoGames.json", allGameData);
+    resolve(allGameData[index]);
   });
 }
 
@@ -28,4 +40,5 @@ module.exports = {
   findAll,
   findById,
   create,
+  update
 };
